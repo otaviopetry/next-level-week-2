@@ -4,6 +4,8 @@ import './styles.css';
 
 import PageHeader from '../../components/PageHeader';
 
+import TeacherItem from '../../components/TeacherItem';
+
 function TeacherList () {
     return (
         <div id="page-teacher-list" className="container">
@@ -28,6 +30,13 @@ function TeacherList () {
 
             </PageHeader>
 
+            <main>
+                <TeacherItem />
+                <TeacherItem />
+                <TeacherItem />
+                <TeacherItem />
+                <TeacherItem />
+            </main>
                         
         </div>
     );
