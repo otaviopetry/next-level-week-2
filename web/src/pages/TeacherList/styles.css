@@ -33,7 +33,6 @@
     outline: 0;
     padding: 0 1.6rem;
     font: 1.6 Archivo;
-
 }
 
 #search-teachers .input-block:focus-within::after {
@@ -45,4 +44,22 @@
     bottom: 0;
     left: 0;
 
+}
+
+@media (min-width: 700px) {
+    #page-teacher-list {
+        max-width: 100%;
+    }
+
+    #search-teachers {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 16px;
+        position: absolute;
+        bottom: -24px;
+    }
+
+    #search-teachers .input-block + .input-block {
+        margin-top: 0;
+    }
 }
