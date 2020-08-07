@@ -8,9 +8,10 @@ import logoImg from '../../assets/images/logo.svg';
 
 interface PageHeaderProps {
     heading: string;
+    description?: string;
 }
 
-const PageHeader: React.FC<PageHeaderProps> = ({ heading, children }) => {
+const PageHeader: React.FC<PageHeaderProps> = ({ heading, description, children }) => {
     return (
         <header className="page-header">
             <div className="top-bar-container">
@@ -22,6 +23,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({ heading, children }) => {
 
             <div className="header-content">
                 <strong>{heading}</strong>
+                { description && <p>{description}</p> }
 
                 {children}
             </div>            
