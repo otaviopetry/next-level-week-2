@@ -10,5 +10,6 @@ routes.post('/classes', classesControllers.create);
 routes.get('/classes', classesControllers.index);
 
 routes.post('/connections', connectionsController.create);
+routes.get('/connections', connectionsController.index);
 
 export default routes;
