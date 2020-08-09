@@ -18,6 +18,7 @@ function TeacherList () {
                     <Select
                         name="subject"
                         label="Matéria"
+                        disabledOption="Selecione a matéria"
                         options={[
                             { value: 'Artes', label: 'Artes' },
                             { value: 'Biologia', label: 'Biologia' },
@@ -34,6 +35,7 @@ function TeacherList () {
                     <Select
                         name="week_day"
                         label="Dia da semana"
+                        disabledOption="Selecione um dia da semana"
                         options={[
                             { value: '0', label: 'Domingo' },
                             { value: '1', label: 'Segunda' },
