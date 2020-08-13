@@ -1,24 +1,50 @@
-import React from 'react';
+import React, { useState, FormEvent } from 'react';
+
+import api from '../../services/api';
 
 import './styles.css';
 
 import PageHeader from '../../components/PageHeader';
-import TeacherItem from '../../components/TeacherItem';
+import TeacherItem, { Teacher } from '../../components/TeacherItem';
 import Input from '../../components/Input';
 import Select from '../../components/Select';
 
 function TeacherList () {
+    const [teachers, setTeachers] = useState([]);
+
+    const [subject, setSubject] = useState('');
+    const [weekday, setWeekday] = useState('');
+    const [time, setTime] = useState('');
+
+    async function searchTeachers (evt: FormEvent) {
+        evt.preventDefault();
+
+        const response = await api.get('classes', {
+            params: {
+                subject,
+                week_day: weekday,
+                time
+            }
+        })
+
+        setTeachers(response.data);
+
+        console.log(response.data);
+    }
+
     return (
         <div id="page-teacher-list" className="container">
             <PageHeader
                 heading="Estes são os proffys disponíveis"
             >
                 
-                <form id="search-teachers">
+                <form id="search-teachers" onSubmit={searchTeachers}>
                     <Select
                         name="subject"
                         label="Matéria"
                         disabledOption="Selecione a matéria"
+                        value={subject}
+                        onChange={evt => setSubject(evt.target.value)}
                         options={[
                             { value: 'Artes', label: 'Artes' },
                             { value: 'Biologia', label: 'Biologia' },
@@ -36,6 +62,8 @@ function TeacherList () {
                         name="week_day"
                         label="Dia da semana"
                         disabledOption="Selecione um dia da semana"
+                        value={weekday}
+                        onChange={evt => setWeekday(evt.target.value)}
                         options={[
                             { value: '0', label: 'Domingo' },
                             { value: '1', label: 'Segunda' },
@@ -46,17 +74,25 @@ function TeacherList () {
                             { value: '6', label: 'Sábado' }
                         ]}
                     />
-                    <Input label='Hora' name='time' type="time" />                    
+                    <Input 
+                        label='Hora' 
+                        name='time' 
+                        type="time" 
+                        value={time}
+                        onChange={evt => setTime(evt.target.value)}
+                    />
+
+                    <button type="submit">
+                        Buscar
+                    </button>           
                 </form>
 
             </PageHeader>
 
             <main>
-                <TeacherItem />
-                <TeacherItem />
-                <TeacherItem />
-                <TeacherItem />
-                <TeacherItem />
+                {teachers.map( (teacher: Teacher) => {
+                    return <TeacherItem key={teacher.id} teacher={teacher} />
+                })}                
             </main>
                         
         </div>
