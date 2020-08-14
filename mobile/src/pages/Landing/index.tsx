@@ -11,11 +11,7 @@ import giveClassesIcon from '../../assets/images/icons/give-classes.png';
 import heartIcon from '../../assets/images/icons/heart.png';
 
 function Landing () {
-    const navigation = useNavigation();
-
-    function handleNavigateToGiveClassesPage () {
-        navigation.navigate('GiveClasses');
-    }
+    const { navigate } = useNavigation();
 
     return (
         <View style={styles.container}>
@@ -29,12 +25,12 @@ function Landing () {
             </Text>
 
             <View style={styles.buttonsContainer}>
-                <RectButton style={[styles.button, styles.buttonPrimary]}>
+                <RectButton onPress={() => navigate('Study')} style={[styles.button, styles.buttonPrimary]}>
                     <Image source={studyIcon} />
                     <Text style={styles.buttonText}>Estudar</Text>
                 </RectButton>
 
-                <RectButton onPress={handleNavigateToGiveClassesPage} style={[styles.button, styles.buttonSecondary]}>
+                <RectButton onPress={() => navigate('GiveClasses')} style={[styles.button, styles.buttonSecondary]}>
                     <Image source={giveClassesIcon} />
                     <Text style={styles.buttonText}>Dar aulas</Text>
                 </RectButton>
