@@ -5,6 +5,7 @@ import { BorderlessButton, RectButton } from 'react-native-gesture-handler';
 import { Feather } from '@expo/vector-icons';
 import api from '../../services/api';
 import AsyncStorage from '@react-native-community/async-storage';
+import { useFocusEffect } from '@react-navigation/native';
 
 import PageHeader from '../../components/PageHeader';
 import TeacherItem, { Teacher } from '../../components/TeacherItem';
@@ -35,7 +36,7 @@ function TeacherList () {
     function handleToggleIsFiltersVisible () {
         setIsFiltersVisible(!isFiltersVisible);
     }
-
+    
     async function handleFiltersSubmit () {
         loadFavorites();
 
