@@ -10,8 +10,20 @@ import TeacherItem from '../../components/TeacherItem';
 function TeacherList () {
     const [isFiltersVisible, setIsFiltersVisible] = useState(false);
 
+    const [subject, setSubject] = useState('');
+    const [weekday, setWeekday] = useState('');
+    const [time, setTime] = useState('');
+
     function handleToggleIsFiltersVisible () {
         setIsFiltersVisible(!isFiltersVisible);
+    }
+
+    function handleFiltersSubmit () {
+        console.log({
+            subject,
+            weekday,
+            time
+        })
     }
 
     return (
@@ -19,7 +31,8 @@ function TeacherList () {
             <PageHeader 
                 title="Proffys disponíveis" 
                 headerRight={(
-                    <BorderlessButton onPress={handleToggleIsFiltersVisible}>
+                    <BorderlessButton onPress={handleToggleIsFiltersVisible} style={styles.filterButton}>
+                        <Text style={styles.filterButtonText}>Filtros</Text>
                         <Feather name="filter" size={20} color="#fff" />
                     </BorderlessButton>
                 )}
@@ -29,6 +42,8 @@ function TeacherList () {
                         <Text style={styles.label}>Matéria</Text>
                         <TextInput
                             style={styles.input}
+                            value={subject}
+                            onChangeText={text => setSubject(text)}
                             placeholder="Qual a matéria?"
                             placeholderTextColor="#c1bccc"
                         />
@@ -38,6 +53,8 @@ function TeacherList () {
                                 <Text style={styles.label}>Dia da semana</Text>
                                 <TextInput
                                     style={styles.input}
+                                    value={weekday}
+                                    onChangeText={text => setWeekday(text)}
                                     placeholder="Qual o dia?"
                                     placeholderTextColor="#c1bccc"
                                 />
@@ -47,13 +64,18 @@ function TeacherList () {
                                 <Text style={styles.label}>Horário</Text>
                                 <TextInput
                                     style={styles.input}
+                                    value={time}
+                                    onChangeText={text => setTime(text)}
                                     placeholder="Qual o horário?"
                                     placeholderTextColor="#c1bccc"
                                 />
                             </View>
                         </View>
 
-                        <RectButton style={styles.submitButton}>
+                        <RectButton 
+                            onPress={handleFiltersSubmit} 
+                            style={styles.submitButton}
+                        >
                             <Text style={styles.submitButtonText}>Buscar</Text>
                         </RectButton>
                     </View>

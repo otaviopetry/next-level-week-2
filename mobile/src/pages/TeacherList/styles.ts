@@ -11,6 +11,17 @@ const styles = StyleSheet.create({
     searchForm: {
         marginBottom: 24,
     },
+    filterButton: {
+        opacity: 0.8,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    filterButtonText: {
+        marginRight: 8,
+        color: '#fff',
+        fontSize: 10        
+    },
     label: {
         color: '#d4c2ff',
         fontFamily: 'Poppins_400Regular'
