@@ -3,12 +3,15 @@ import { View, ScrollView, Text, TextInput } from 'react-native';
 import styles from './styles';
 import { BorderlessButton, RectButton } from 'react-native-gesture-handler';
 import { Feather } from '@expo/vector-icons';
+import api from '../../services/api';
 
 import PageHeader from '../../components/PageHeader';
-import TeacherItem from '../../components/TeacherItem';
+import TeacherItem, { Teacher } from '../../components/TeacherItem';
 
 function TeacherList () {
-    const [isFiltersVisible, setIsFiltersVisible] = useState(false);
+    const [teachers, setTeachers] = useState([]);
+
+    const [isFiltersVisible, setIsFiltersVisible] = useState(true);
 
     const [subject, setSubject] = useState('');
     const [weekday, setWeekday] = useState('');
@@ -18,12 +21,18 @@ function TeacherList () {
         setIsFiltersVisible(!isFiltersVisible);
     }
 
-    function handleFiltersSubmit () {
-        console.log({
-            subject,
-            weekday,
-            time
-        })
+    async function handleFiltersSubmit () {
+        const response = await api.get('classes', {
+            params: {
+                subject,
+                week_day: weekday,
+                time,
+            }
+        });
+        
+        setTeachers(response.data);
+
+        setIsFiltersVisible(false);
     }
 
     return (
@@ -88,10 +97,9 @@ function TeacherList () {
                     padding: 16
                 }}
             >
-                <TeacherItem />
-                <TeacherItem />
-                <TeacherItem />
-                <TeacherItem />
+                {teachers.map((teacher: Teacher) => {
+                    return <TeacherItem key={teacher.id} teacher={teacher} />
+                })}
             </ScrollView>
         </View>
     );
